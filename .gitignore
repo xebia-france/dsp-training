@@ -1,0 +1,16 @@
+venv/
+.DS_Store
+.ipynb_checkpoints
+*.pkl
+*.ipynb
+
+data/*
+/tests/free_integration_test/data/*
+# Keep raw data for free integration test (see tests/README.md for more explanations).
+!/tests/free_integration_test/data/raw
+
+__pycache__
+*.pyc
+
+.idea/*
+.pytest_cache
