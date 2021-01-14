@@ -12,12 +12,14 @@ def preprocess():
     
     :return: None.
     """
+    # TODO: utiliser un pipeline sklearn
+    # TODO: sauvegarder les transformers sklearn
     logging.info("Preprocessing raw data.")
-    world_gdp_energy = pd.read_csv(os.path.join(files.RAW_DATA, files.GDP_ENERGY_DATA_CSV))
+    loans_df = pd.read_csv(os.path.join(files.RAW_DATA, files.LOANS_CSV))
     
-    world_gdp_energy = convert_world_GDP_in_billion_usd(world_gdp_energy)
+    loans_df = convert_world_GDP_in_billion_usd(loans_df)
     
-    world_gdp_energy.to_csv(os.path.join(files.INTERIM_DATA, files.GDP_ENERGY_DATA_CSV), index=False)
+    loans_df.to_csv(os.path.join(files.INTERIM_DATA, files.LOANS_CSV), index=False)
     
 
 def convert_world_GDP_in_billion_usd(world_gdp_energy):

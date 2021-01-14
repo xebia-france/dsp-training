@@ -42,7 +42,7 @@ LIN_REG_PLOTS = files.create_folder(os.path.join(files.PLOTS, "lin_reg"))
 # %matplotlib inline
 
 # +
-world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.GDP_ENERGY_DATA_CSV))
+world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.LOANS_CSV))
 
 train_df, test_df = split_train_test(world_gdp_energy)
     

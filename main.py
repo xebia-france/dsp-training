@@ -15,7 +15,7 @@ def main(bool_dict):
     useful to re-run all steps but model training steps if they are already done for example.
     :return:
     """
-    download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.GDP_ENERGY_DATA_CSV))
+    download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS_CSV))
     
     if bool_dict["preprocess"]:
         preprocess()

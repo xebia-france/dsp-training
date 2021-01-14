@@ -18,7 +18,7 @@ def lin_reg_train():
     
     :return: None
     """
-    world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.GDP_ENERGY_DATA_CSV))
+    world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.LOANS_CSV))
     
     train_df, test_df = split_train_test(world_gdp_energy)
     min_year = train_df[c.EnergyConsumptionGDP.YEAR].min()
@@ -30,6 +30,7 @@ def lin_reg_train():
     lin_reg.fit(
         train_df[c.EnergyConsumptionGDP.WORLD_GDP_BILLION_USD].values.reshape(-1, 1),
         train_df[c.EnergyConsumptionGDP.WORLD_ENERGY_CONSUMPTION])
-    
+
+    # TODO: utiliser MlFlow
     logging.info("Saving model.")
     dump(lin_reg, os.path.join(LIN_REG_MODELS_PATH, f"world_gdp_energy_lin_reg_{min_year}_to_{max_year}.joblib"))

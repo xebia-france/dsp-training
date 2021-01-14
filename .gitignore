@@ -4,6 +4,8 @@ venv/
 *.pkl
 *.ipynb
 
+data
+
 /tests/free_integration_test/data/*
 # Keep raw data for free integration test (see tests/README.md for more explanations).
 !/tests/free_integration_test/data/raw
