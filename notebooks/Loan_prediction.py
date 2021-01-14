@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # ---
 # jupyter:
 #   jupytext:
@@ -7,9 +8,9 @@
 #       format_version: '1.5'
 #       jupytext_version: 1.9.1
 #   kernelspec:
-#     display_name: dsp
+#     display_name: Python (dsp-training)
 #     language: python
-#     name: dsp
+#     name: dsp-training
 # ---
 
 # +
@@ -23,7 +24,7 @@ import seaborn as sns
 import sys
 sys.path.append("..")
 
-from src.constants import files
+from src.constants import files, columns as c
 import os
 
 from sklearn.model_selection import train_test_split
@@ -31,6 +32,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.pipeline import Pipeline, make_pipeline, FeatureUnion
 from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.compose import ColumnTransformer, make_column_transformer
 # -
 
 # # Load data
@@ -41,9 +44,9 @@ train_df, test_df = train_test_split(loans_df, test_size=0.2, random_state=1)
 
 # # Preprocessing
 
-loans_df.describe()
+train_df.describe()
 
-loans_df.shape
+train_df.shape
 
 
 def null_values_stats(input_df):
@@ -53,18 +56,26 @@ def null_values_stats(input_df):
     print(missing_data.head(20))
 
 
-null_values_stats(loans_df)
+null_values_stats(train_df)
 
 # ## Fill missing values
 
+num_variables = c.Loans.num_features()
+cat_variables = c.Loans.cat_features()
+
 # +
-pipeline = Pipeline([('imputer', SimpleImputer(strategy="most_frequent")),
-                    ('one_hot_encoding', OneHotEncoder(sparse=False))])
+pipeline = make_column_transformer(
+    (make_pipeline(SimpleImputer(strategy="most_frequent"), StandardScaler()), num_variables),
+    (make_pipeline(SimpleImputer(strategy="most_frequent"), OneHotEncoder()), cat_variables)
+)
 
 # TODO: utiliser https://jorisvandenbossche.github.io/blog/2018/05/28/scikit-learn-columntransformer/
 
 preprocessed_train = pipeline.fit_transform(train_df)
 # -
+
+# TODO: trouver un moyen d'accéder aux features
+type(pipeline)
 
 preprocessed_train
 

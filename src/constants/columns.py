@@ -1,21 +1,45 @@
-class EnergyConsumptionGDP():
-    """
-    Dataframe of evolution of world GDP and energy consumption between 1965 and 2008.
-    """
-    YEAR = "year"
+from enum import Enum
 
-    WORLD_ENERGY_CONSUMPTION = "world energy consumption in million tons oil equivalent"
-    """
-    Total world consumption of commercially traded energys only, expressed in million tons oil equivalent. This
-    comprises oil, natural gaz, coal, nuclear and hydro electric energy, and excludes wood, peat, animal waste,
-    wind, geothermal and solar power.
-    Source: BP statistical review of World energy, 2009 https://openei.org/wiki/BP_Statistical_Review_of_World_Energy.
-    """
 
-    WORLD_GDP_USD = "world GDP in 2016 USD"
-    """
-    World GDP in 2016 USD.
-    Source: https://pkgstore.datahub.io/core/gdp/gdp_csv/data/0048bc8f6228d0393d41cac4b663b90f/gdp_csv.csv
-    """
-    
-    WORLD_GDP_BILLION_USD = "world GDP in billion 2016 USD"
+class Loans(str, Enum):
+    Loan_Status = "Loan_Status"
+    Credit_History = "Credit_History"
+    Self_Employed = "Self_Employed"
+    LoanAmount = "LoanAmount"
+    Gender = "Gender"
+    Dependents = "Dependents"
+    Loan_Amount_Term = "Loan_Amount_Term"
+    Married = "Married"
+    Loan_ID = "Loan_ID"
+    Education = "Education"
+    ApplicantIncome = "ApplicantIncome"
+    CoapplicantIncome = "CoapplicantIncome"
+    Property_Area = "Property_Area"
+    # TODO: documentation of variables
+
+    # TODO remove the .value
+    @classmethod
+    def num_features(cls):
+        return [
+            cls.Credit_History.value,
+            cls.ApplicantIncome.value,
+            cls.CoapplicantIncome.value,
+            cls.LoanAmount.value,
+            cls.Loan_Amount_Term.value
+        ]
+
+    @classmethod
+    def cat_features(cls):
+        return [
+            cls.Dependents.value,
+            cls.Gender.value,
+            cls.Married.value,
+            cls.Education.value,
+            cls.Self_Employed.value,
+            cls.Education.value,
+            cls.Loan_Status.value
+        ]
+
+    @classmethod
+    def target(cls):
+        return cls.Loan_Status.value
