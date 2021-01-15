@@ -1,8 +1,8 @@
 import os
 
 from src.utils import download_file_from_url
-from src.preprocess import preprocess
-from src.lin_reg.lin_reg_train import lin_reg_train
+from src.preprocess import preprocess, split_train_test
+from src.lin_reg.lin_reg_train import logistic_reg_train
 from src.evaluation.evaluate import evaluate
 import src.constants.files as files
 
@@ -15,20 +15,24 @@ def main(bool_dict):
     useful to re-run all steps but model training steps if they are already done for example.
     :return:
     """
-    download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS_CSV))
-    
+    download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
+
+    if bool_dict["split"]:
+        split_train_test()
+
     if bool_dict["preprocess"]:
         preprocess()
 
-    if bool_dict["lin_reg_train"]:
-        lin_reg_train()
+    if bool_dict["logistic_reg_train"]:
+        logistic_reg_train()
 
     if bool_dict["evaluate"]:
         evaluate()
 
 
 if __name__ == "__main__":
-    bool_dict = {"preprocess": True,
-                 "lin_reg_train": True,
+    bool_dict = {"split": True,
+                 "preprocess": True,
+                 "logistic_reg_train": True,
                  "evaluate": True}
     main(bool_dict)

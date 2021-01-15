@@ -12,13 +12,13 @@ from src.lin_reg.lin_reg_core import split_train_test
 LIN_REG_MODELS_PATH = files.create_folder(os.path.join(files.MODELS, "lin_reg"))
 
 
-def lin_reg_train():
+def logistic_reg_train():
     """
     Train linear regression with World GDP as input and World energy consumption as label to predict.
     
     :return: None
     """
-    world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.LOANS_CSV))
+    world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.LOANS))
     
     train_df, test_df = split_train_test(world_gdp_energy)
     min_year = train_df[c.EnergyConsumptionGDP.YEAR].min()

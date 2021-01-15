@@ -12,7 +12,7 @@ from src.utils import mean_absolute_percentage_error
 
 
 def evaluate():
-    world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.LOANS_CSV))
+    world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.LOANS))
 
     train_df, test_df = split_train_test(world_gdp_energy)
 

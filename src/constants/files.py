@@ -39,9 +39,14 @@ RAW_DATA = create_folder(os.path.join(DATA_PATH, "raw"))
 INTERIM_DATA = create_folder(os.path.join(DATA_PATH, "interim"))
 OUTPUT_DATA = create_folder(os.path.join(DATA_PATH, "output"))
 MODELS = create_folder(os.path.join(DATA_PATH, "models"))
+PIPELINES = create_folder(os.path.join(DATA_PATH, "pipelines"))
 
 PLOTS = create_folder(os.path.join(OUTPUT_DATA, "plots"))
 
 GDP_ENERGY_DATA_URL = "https://gitlab.com/VincentVillet/cookiecutter-data-fr/-/raw/master/world_gdp_and_energy_consumption.csv"
 
-LOANS_CSV = "loans.csv"
+LOANS = "loans.csv"
+TRAIN = "train.csv"
+TEST = "test.csv"
+PREPROCESSED_TRAIN = "preprocessed_train.csv"
+PREPROCESSING_PIPELINE = "pipeline.joblib"
