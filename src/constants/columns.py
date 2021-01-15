@@ -36,8 +36,7 @@ class Loans(str, Enum):
             cls.Married.value,
             cls.Education.value,
             cls.Self_Employed.value,
-            cls.Education.value,
-            cls.Loan_Status.value
+            cls.Education.value
         ]
 
     @classmethod
