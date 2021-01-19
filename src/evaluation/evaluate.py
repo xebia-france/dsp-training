@@ -5,25 +5,24 @@ import logging
 
 import src.constants.files as files
 import src.constants.columns as c
-from src.lin_reg.lin_reg_core import split_train_test
-from src.lin_reg.lin_reg_train import LIN_REG_MODELS_PATH
-from src.evaluation.plots import plot_world_gdp_energy_lin_reg
-from src.utils import mean_absolute_percentage_error
+from src.logistic_reg.logistic_reg_train import LOGISTIC_REG_MODELS_PATH
+from sklearn.metrics import f1_score
 
 
 def evaluate():
-    world_gdp_energy = pd.read_csv(os.path.join(files.INTERIM_DATA, files.LOANS))
+    test_df = pd.read_csv(os.path.join(files.INTERIM_DATA, files.TEST))
 
-    train_df, test_df = split_train_test(world_gdp_energy)
+    preprocessing_pipeline = load(os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE))
+    preprocessed_test = preprocessing_pipeline.transform(test_df)
+    y_test = test_df[c.Loans.Loan_Status].values
 
-    lin_reg_model_names = [file for file in os.listdir(LIN_REG_MODELS_PATH) if "joblib" in file]
+    logistic_reg_model_names = [file for file in os.listdir(LOGISTIC_REG_MODELS_PATH) if "joblib" in file]
 
-    for lin_reg_model_name in lin_reg_model_names:
-        logging.info(f"Evaluating {lin_reg_model_name}")
-        lin_reg = load(os.path.join(LIN_REG_MODELS_PATH, lin_reg_model_name))
-        predictions = lin_reg.predict(test_df[c.EnergyConsumptionGDP.WORLD_GDP_BILLION_USD].values.reshape(-1, 1))
+    for logistic_reg_model_name in logistic_reg_model_names:
+        logging.info(f"Evaluating {logistic_reg_model_name}")
+        logistic_reg = load(os.path.join(LOGISTIC_REG_MODELS_PATH, logistic_reg_model_name))
+        y_pred = logistic_reg.predict(preprocessed_test)
 
-        mape = mean_absolute_percentage_error(test_df[c.EnergyConsumptionGDP.WORLD_ENERGY_CONSUMPTION], predictions)
+        score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
 
-        plot_world_gdp_energy_lin_reg(world_gdp_energy, predictions, test_df, mape, lin_reg, lin_reg_model_name)
-        
+        logging.info(f"F1 score for model {logistic_reg_model_name} is {score}")

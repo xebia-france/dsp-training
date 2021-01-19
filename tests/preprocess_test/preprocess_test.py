@@ -13,7 +13,7 @@ def test_preprocess():
 
     result = convert_world_GDP_in_billion_usd(input)
 
-    logging.info("writing results csv")
+    logging.info("Writing results csv")
     result.to_csv(os.path.join(LOCAT_ROOT, "result.csv"), index=False)
 
     expected = pd.read_csv(os.path.join(LOCAT_ROOT, "expected.csv"))

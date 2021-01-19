@@ -14,7 +14,7 @@ def mean_absolute_percentage_error(y_true, y_pred):
 
 def download_file_from_url(url, file_path, overwrite=False):
     if not overwrite and os.path.exists(file_path):
-        logging.info(f"File '{file_path.replace(files.PROJECT_ROOT_PATH, '')}' already exists, we do not overwrite it.")
+        logging.info(f"File '{file_path.replace(files.PROJECT_ROOT_PATH, '')}' already exists, we do not overwrite it")
         return
     # TODO: Remplacer par un bucket Cloud Storage
     logging.info(f"Download file at url {url} to '{file_path.replace(files.PROJECT_ROOT_PATH, '')}'")

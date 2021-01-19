@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class Loans(str, Enum):
+    # TODO: mettre les noms de variables en majuscule ?
     Loan_Status = "Loan_Status"
     Credit_History = "Credit_History"
     Self_Employed = "Self_Employed"

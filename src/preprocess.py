@@ -19,7 +19,7 @@ def preprocess():
     
     :return: None.
     """
-    logging.info("Preprocessing raw data.")
+    logging.info("Preprocessing raw data")
     train_df = pd.read_csv(os.path.join(files.INTERIM_DATA, files.TRAIN))
 
     num_features = c.Loans.num_features()
@@ -44,16 +44,18 @@ def preprocess():
         )
     ])
 
-    logging.info("fitting the column_transformer")
+    logging.info("Fitting the column_transformer")
     preprocessed_train = pipeline.fit_transform(train_df)
 
     one_hot_cols = retrieve_one_hot_columns(pipeline, cat_features)
     preprocessed_train_df = pd.DataFrame(preprocessed_train, columns=num_features + one_hot_cols)
 
-    logging.info("saving the preprocessed train dataframe")
+    preprocessed_train_df[c.Loans.Loan_Status] = train_df[c.Loans.Loan_Status]
+
+    logging.info("Saving the preprocessed train dataframe")
     preprocessed_train_df.to_csv(os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN), index=False)
 
-    logging.info("saving the preprocessing pipeline")
+    logging.info("Saving the preprocessing pipeline")
     dump(pipeline, os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE))
 
 

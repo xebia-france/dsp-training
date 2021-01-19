@@ -23,7 +23,7 @@ def prepare_raw_test_data(force_recompute=False):
         files_to_copy_in_test = real_raw_csv_files
 
     for file in files_to_copy_in_test:
-        logging.info(f"Truncating {file} and writing truncated version into test raw data folder.")
+        logging.info(f"Truncating {file} and writing truncated version into test raw data folder")
         df = pd.read_csv(os.path.join(REAL_RAW_DATA_PATH, file))
 
         # Keep 10 years before end train year and 5 years after.

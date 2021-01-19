@@ -2,7 +2,7 @@ import os
 
 from src.utils import download_file_from_url
 from src.preprocess import preprocess, split_train_test
-from src.lin_reg.lin_reg_train import logistic_reg_train
+from src.logistic_reg.logistic_reg_train import logistic_reg_train
 from src.evaluation.evaluate import evaluate
 import src.constants.files as files
 
