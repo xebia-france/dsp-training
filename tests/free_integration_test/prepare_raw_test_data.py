@@ -26,8 +26,7 @@ def prepare_raw_test_data(force_recompute=False):
         logging.info(f"Truncating {file} and writing truncated version into test raw data folder")
         df = pd.read_csv(os.path.join(REAL_RAW_DATA_PATH, file))
 
-        # Keep 10 years before end train year and 5 years after.
-        df_trunc = df[(df[c.EnergyConsumptionGDP.YEAR] >= md.END_TRAIN_YEAR - 10)
-                      & (df[c.EnergyConsumptionGDP.YEAR] <= md.END_TRAIN_YEAR + 5)]
+        # Keep only a sub amount of data.
+        df_trunc = df.iloc[:100]
 
         df_trunc.to_csv(os.path.join(TEST_RAW_DATA_PATH, file), index=False)

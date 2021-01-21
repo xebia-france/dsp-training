@@ -10,7 +10,7 @@ def create_folder(path):
 
 
 # equals True when running test with pytest because of environment variable specified in pytest.ini
-is_running_test = eval(os.getenv("IS_RUNNING_TEST", "False")) 
+is_running_test = eval(os.getenv("IS_RUNNING_TEST", "False"))
 
 # TODO: améliorer avec pathlib ?
 PROJECT_ROOT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..",)
