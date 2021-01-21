@@ -26,3 +26,5 @@ def evaluate():
         score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
 
         logging.info(f"F1 score for model {logistic_reg_model_name} is {score}")
+
+        # TODO send evaluations to Mlflow

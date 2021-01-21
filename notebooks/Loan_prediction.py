@@ -8,9 +8,9 @@
 #       format_version: '1.5'
 #       jupytext_version: 1.9.1
 #   kernelspec:
-#     display_name: dsp
+#     display_name: Python (dsp-training)
 #     language: python
-#     name: dsp
+#     name: dsp-training
 # ---
 
 # +

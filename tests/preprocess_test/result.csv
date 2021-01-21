@@ -1,3 +1,5 @@
-year,world energy consumption in million tons oil equivalent,world GDP in 2016 USD,world GDP in billion 2016 USD
-1990,8094.7,22595007714784,22595
-1992,8167.0,1000000000,1
+Credit_History,ApplicantIncome,CoapplicantIncome,LoanAmount,Loan_Amount_Term,Dependents_1,Gender_Male,Married_Yes,Education_Graduate,Self_Employed_Yes,Education_Graduate,Loan_Status
+0.0,-1.0,-1.507556722888818,-1.414213562373095,0.0,0.0,1.0,0.0,1.0,0.0,1.0,Y
+0.0,-1.0,-0.30151134457776363,0.0,0.0,1.0,1.0,1.0,1.0,0.0,1.0,N
+0.0,1.0,0.9045340337332908,1.414213562373095,0.0,0.0,1.0,1.0,1.0,1.0,1.0,Y
+0.0,1.0,0.9045340337332908,0.0,0.0,0.0,0.0,1.0,1.0,1.0,1.0,Y

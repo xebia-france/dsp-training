@@ -13,18 +13,36 @@ import src.constants.columns as c
 import src.constants.files as files
 
 
-def preprocess():
+def preprocess(training_file_path, preprocessed_train_destination, preprocessing_pipeline_destination):
     """
-    Take raw data as input and write preprocessed data into data/interim.
-    
+    Take training_file_path as input and write preprocessed data into preprocessed_train_destination.
+
     :return: None.
     """
     logging.info("Preprocessing raw data")
-    train_df = pd.read_csv(os.path.join(files.INTERIM_DATA, files.TRAIN))
+    train_df = pd.read_csv(training_file_path)
 
     num_features = c.Loans.num_features()
     cat_features = c.Loans.cat_features()
 
+    pipeline = fit_preprocessing_pipeline(train_df, num_features, cat_features)
+
+    logging.info("Transforming the column_transformer")
+    preprocessed_train = pipeline.transform(train_df)
+
+    one_hot_cols = retrieve_one_hot_columns(pipeline, cat_features)
+    preprocessed_train_df = pd.DataFrame(preprocessed_train, columns=num_features + one_hot_cols)
+
+    preprocessed_train_df[c.Loans.Loan_Status] = train_df[c.Loans.Loan_Status]
+
+    logging.info("Saving the preprocessed train dataframe")
+    preprocessed_train_df.to_csv(preprocessed_train_destination, index=False)
+
+    logging.info("Saving the preprocessing pipeline")
+    dump(pipeline, preprocessing_pipeline_destination)
+
+
+def fit_preprocessing_pipeline(train_df, num_features, cat_features):
     pipeline = ColumnTransformer([
         (
             "num_pipeline",
@@ -44,19 +62,8 @@ def preprocess():
         )
     ])
 
-    logging.info("Fitting the column_transformer")
-    preprocessed_train = pipeline.fit_transform(train_df)
-
-    one_hot_cols = retrieve_one_hot_columns(pipeline, cat_features)
-    preprocessed_train_df = pd.DataFrame(preprocessed_train, columns=num_features + one_hot_cols)
-
-    preprocessed_train_df[c.Loans.Loan_Status] = train_df[c.Loans.Loan_Status]
-
-    logging.info("Saving the preprocessed train dataframe")
-    preprocessed_train_df.to_csv(os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN), index=False)
-
-    logging.info("Saving the preprocessing pipeline")
-    dump(pipeline, os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE))
+    pipeline.fit(train_df)
+    return pipeline
 
 
 def retrieve_one_hot_columns(pipeline, cat_features):

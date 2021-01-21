@@ -21,7 +21,11 @@ def main(bool_dict):
         split_train_test()
 
     if bool_dict["preprocess"]:
-        preprocess()
+        preprocess(
+            training_file_path=os.path.join(files.INTERIM_DATA, files.TRAIN),
+            preprocessed_train_destination=os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN),
+            preprocessing_pipeline_destination=os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE)
+        )
 
     if bool_dict["logistic_reg_train"]:
         logistic_reg_train()
