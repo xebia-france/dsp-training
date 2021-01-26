@@ -9,8 +9,8 @@ LOCAT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
 def test_preprocess():
     # Given
-    pipeline_destination = os.path.join(LOCAT_ROOT, "pipeline.joblib")
-    preprocess_train_destination = os.path.join(LOCAT_ROOT, "result.csv")
+    pipeline_destination = os.path.join(LOCAT_ROOT, "pipeline_test.joblib")
+    preprocess_train_destination = os.path.join(LOCAT_ROOT, "result_test.csv")
 
     # When
     preprocess(

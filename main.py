@@ -1,5 +1,6 @@
 import os
 
+from src.evaluation.evaluate_mlflow import evaluate_mlflow
 from src.utils import download_file_from_url
 from src.preprocess import preprocess, split_train_test
 from src.logistic_reg.logistic_reg_train import logistic_reg_train
@@ -33,10 +34,14 @@ def main(bool_dict):
     if bool_dict["evaluate"]:
         evaluate()
 
+    if bool_dict["evaluate_mlflow"]:
+        evaluate_mlflow()
+
 
 if __name__ == "__main__":
     bool_dict = {"split": True,
                  "preprocess": True,
                  "logistic_reg_train": True,
-                 "evaluate": True}
+                 "evaluate": True,
+                 "evaluate_mlflow": True}
     main(bool_dict)

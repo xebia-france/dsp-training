@@ -6,6 +6,7 @@ def test_main():
     bool_dict = {"split": True,
                  "preprocess": True,
                  "logistic_reg_train": True,
-                 "evaluate": True}
+                 "evaluate": True,
+                 "evaluate_mlflow": False}
     prepare_raw_test_data()
     main(bool_dict)

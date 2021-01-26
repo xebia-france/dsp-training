@@ -3,6 +3,7 @@ import os
 from sklearn.linear_model import LogisticRegression
 from joblib import dump
 import logging
+from datetime import date
 
 import src.constants.files as files
 import src.constants.columns as c
@@ -26,6 +27,6 @@ def logistic_reg_train():
         train_df.drop(c.Loans.Loan_Status, axis=1).values,
         train_df[c.Loans.Loan_Status].values)
 
-    # TODO: utiliser MlFlow
     logging.info("Saving model")
-    dump(logistic_reg, os.path.join(LOGISTIC_REG_MODELS_PATH, f"logistic_regression.joblib"))
+    model_filename = "logistic_regression_%s.joblib" % date.today().strftime("%Y%m%d")
+    dump(logistic_reg, os.path.join(LOGISTIC_REG_MODELS_PATH, model_filename))
