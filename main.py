@@ -1,4 +1,5 @@
 import os
+import mlflow
 
 from src.evaluation.evaluate_mlflow import evaluate_mlflow
 from src.utils import download_file_from_url
@@ -18,24 +19,25 @@ def main(bool_dict):
     """
     download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
 
-    if bool_dict["split"]:
-        split_train_test()
+    with mlflow.start_run():
+        if bool_dict["split"]:
+            split_train_test()
 
-    if bool_dict["preprocess"]:
-        preprocess(
-            training_file_path=os.path.join(files.INTERIM_DATA, files.TRAIN),
-            preprocessed_train_destination=os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN),
-            preprocessing_pipeline_destination=os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE)
-        )
+        if bool_dict["preprocess"]:
+            preprocess(
+                training_file_path=os.path.join(files.INTERIM_DATA, files.TRAIN),
+                preprocessed_train_destination=os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN),
+                preprocessing_pipeline_destination=os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE)
+            )
 
-    if bool_dict["logistic_reg_train"]:
-        logistic_reg_train()
+        if bool_dict["logistic_reg_train"]:
+            logistic_reg_train()
 
-    if bool_dict["evaluate"]:
-        evaluate()
+        if bool_dict["evaluate"]:
+            evaluate()
 
-    if bool_dict["evaluate_mlflow"]:
-        evaluate_mlflow()
+        if bool_dict["evaluate_mlflow"]:
+            evaluate_mlflow()
 
 
 if __name__ == "__main__":
@@ -45,3 +47,7 @@ if __name__ == "__main__":
                  "evaluate": True,
                  "evaluate_mlflow": True}
     main(bool_dict)
+
+    # TODO: sauvegarder le pipeline de preprocessing avec Mlflow
+    # TODO: refacto lien vers le modèle en cours.
+    # TODO: model registry.

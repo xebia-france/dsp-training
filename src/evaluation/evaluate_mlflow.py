@@ -18,20 +18,16 @@ def evaluate_mlflow():
     preprocessed_test = preprocessing_pipeline.transform(test_df)
     y_test = test_df[c.Loans.Loan_Status].values
 
-    logistic_reg_model_names = [file for file in os.listdir(LOGISTIC_REG_MODELS_PATH) if "joblib" in file]
+    run = mlflow.active_run()
+    run_id = run.info.run_id
 
-    with mlflow.start_run():
-        for logistic_reg_model_name in logistic_reg_model_names:
-            logging.info(f"Evaluating with mlflow {logistic_reg_model_name}")
-            model_date = logistic_reg_model_name.replace(".joblib", "")[-8:]
+    logistic_reg_model_name = os.path.join(files.PROJECT_ROOT_PATH, "mlruns", "0", run_id, "artifacts", "logistic_reg",
+                                           "model.pkl")
 
-            logistic_reg = load(os.path.join(LOGISTIC_REG_MODELS_PATH, logistic_reg_model_name))
-            y_pred = logistic_reg.predict(preprocessed_test)
+    logistic_reg = load(os.path.join(LOGISTIC_REG_MODELS_PATH, logistic_reg_model_name))
+    y_pred = logistic_reg.predict(preprocessed_test)
 
-            score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
+    score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
 
-            mlflow.log_metric("f1_score", score)
-            mlflow.log_param("model_date", model_date)
+    mlflow.log_metric("f1_score", score)
 
-            # TODO: investigate how to log the model
-            # mlflow.sklearn.log_model(logistic_reg, "logistic_reg")
