@@ -3,7 +3,7 @@ import os
 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
-from joblib import dump
+import mlflow
 from sklearn.impute import SimpleImputer
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
@@ -11,6 +11,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 import src.constants.columns as c
 import src.constants.files as files
+from src.constants import models
 
 
 def preprocess(training_file_path, preprocessed_train_destination, preprocessing_pipeline_destination):
@@ -39,7 +40,7 @@ def preprocess(training_file_path, preprocessed_train_destination, preprocessing
     preprocessed_train_df.to_csv(preprocessed_train_destination, index=False)
 
     logging.info("Saving the preprocessing pipeline")
-    dump(pipeline, preprocessing_pipeline_destination)
+    mlflow.sklearn.log_model(pipeline, models.PREPROCESSING_PIPELINE)
 
 
 def fit_preprocessing_pipeline(train_df, num_features, cat_features):

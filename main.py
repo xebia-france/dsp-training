@@ -1,11 +1,11 @@
 import os
 import mlflow
+from datetime import datetime
 
 from src.evaluation.evaluate_mlflow import evaluate_mlflow
 from src.utils import download_file_from_url
 from src.preprocess import preprocess, split_train_test
 from src.logistic_reg.logistic_reg_train import logistic_reg_train
-from src.evaluation.evaluate import evaluate
 import src.constants.files as files
 
 
@@ -19,7 +19,8 @@ def main(bool_dict):
     """
     download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
 
-    with mlflow.start_run():
+    today_str = str(datetime.date(datetime.now()))
+    with mlflow.start_run(run_name=today_str):
         if bool_dict["split"]:
             split_train_test()
 
@@ -33,18 +34,14 @@ def main(bool_dict):
         if bool_dict["logistic_reg_train"]:
             logistic_reg_train()
 
-        if bool_dict["evaluate"]:
-            evaluate()
-
         if bool_dict["evaluate_mlflow"]:
             evaluate_mlflow()
 
 
 if __name__ == "__main__":
     bool_dict = {"split": True,
-                 "preprocess": True,
+                 "preprocess": False,
                  "logistic_reg_train": True,
-                 "evaluate": True,
                  "evaluate_mlflow": True}
     main(bool_dict)
 

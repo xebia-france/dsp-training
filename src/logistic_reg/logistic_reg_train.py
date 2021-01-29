@@ -8,9 +8,7 @@ import mlflow
 
 import src.constants.columns as c
 import src.constants.files as files
-
-
-LOGISTIC_REG_MODELS_PATH = files.create_folder(os.path.join(files.MODELS, "logistic_reg"))
+import src.constants.models as models
 
 
 def logistic_reg_train():
@@ -30,4 +28,4 @@ def logistic_reg_train():
 
     logging.info("Saving model")
 
-    mlflow.sklearn.log_model(logistic_reg, "logistic_reg")
+    mlflow.sklearn.log_model(logistic_reg, models.MODEL_NAME)
