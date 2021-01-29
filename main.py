@@ -1,3 +1,4 @@
+import logging
 import os
 import mlflow
 from datetime import datetime
@@ -40,11 +41,11 @@ def main(bool_dict):
 
 if __name__ == "__main__":
     bool_dict = {"split": True,
-                 "preprocess": False,
+                 "preprocess": True,
                  "logistic_reg_train": True,
                  "evaluate_mlflow": True}
+
     main(bool_dict)
 
-    # TODO: sauvegarder le pipeline de preprocessing avec Mlflow
-    # TODO: refacto lien vers le modèle en cours.
     # TODO: model registry.
+    # TODO: logger et tester les infos du preprocessing_pipeline chargé dans evaluate_mlflow.py
