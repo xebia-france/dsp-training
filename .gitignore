@@ -4,6 +4,7 @@ venv/
 *.pkl
 *.ipynb
 
+dsp
 data
 mlruns
 
