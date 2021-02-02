@@ -40,6 +40,7 @@ def load_latest_preprocessing_pipeline():
     runs = MlflowClient().search_runs(
         experiment_ids="0",
         run_view_type=ViewType.ACTIVE_ONLY,
+        order_by=["tag.start_time DESC"]
     )
 
     for run in runs:
