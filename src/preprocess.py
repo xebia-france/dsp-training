@@ -14,7 +14,7 @@ import src.constants.files as files
 from src.constants import models
 
 
-def preprocess(training_file_path, preprocessed_train_destination, preprocessing_pipeline_destination):
+def preprocess(training_file_path, preprocessed_train_destination):
     """
     Take training_file_path as input and write preprocessed data into preprocessed_train_destination.
 

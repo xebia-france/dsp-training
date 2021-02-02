@@ -28,8 +28,7 @@ def main(bool_dict):
         if bool_dict["preprocess"]:
             preprocess(
                 training_file_path=os.path.join(files.INTERIM_DATA, files.TRAIN),
-                preprocessed_train_destination=os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN),
-                preprocessing_pipeline_destination=os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE)
+                preprocessed_train_destination=os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN)
             )
 
         if bool_dict["logistic_reg_train"]:
@@ -48,4 +47,5 @@ if __name__ == "__main__":
     main(bool_dict)
 
     # TODO: model registry.
-    # TODO: logger et tester les infos du preprocessing_pipeline chargé dans evaluate_mlflow.py
+    # TODO: Nettoyer les tests.
+    # TODO: Rajouter des tests notamment sur le mécanisme de récupération du dernier preprocessing_pipeline.

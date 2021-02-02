@@ -18,7 +18,7 @@ PROJECT_ROOT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..
 if not is_running_test:
     DATA_PATH = create_folder(os.path.join(PROJECT_ROOT_PATH, "data"))
 else:
-    DATA_PATH = create_folder(os.path.join(PROJECT_ROOT_PATH, "tests", "free_integration_test", "data"))
+    DATA_PATH = create_folder(os.path.join(PROJECT_ROOT_PATH, "tests", "free_integration_test", "data_test"))
 
 # TODO: revoir la gestion des logs
 # Set up writing of logs to today’s log file

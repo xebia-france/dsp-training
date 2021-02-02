@@ -7,6 +7,8 @@ venv/
 dsp
 data
 mlruns
+data_test
+mlruns_test
 
 /tests/free_integration_test/data/*
 # Keep raw data for free integration test (see tests/README.md for more explanations).

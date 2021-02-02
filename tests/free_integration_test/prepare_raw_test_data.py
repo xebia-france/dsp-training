@@ -2,15 +2,13 @@ import pandas as pd
 import os
 
 import src.constants.files as files
-import src.constants.columns as c
-import src.constants.models as md
 
 import logging
 
 
 REAL_DATA_PATH = files.create_folder(os.path.join(files.PROJECT_ROOT_PATH, "data"))
 REAL_RAW_DATA_PATH = files.create_folder(os.path.join(REAL_DATA_PATH, "raw"))
-TEST_RAW_DATA_PATH = os.path.join(files.PROJECT_ROOT_PATH, "tests", "free_integration_test", "data", "raw")
+TEST_RAW_DATA_PATH = os.path.join(files.PROJECT_ROOT_PATH, "tests", "free_integration_test", "data_test", "raw")
 
 
 def prepare_raw_test_data(force_recompute=False):
