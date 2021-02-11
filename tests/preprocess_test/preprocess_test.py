@@ -2,6 +2,7 @@ import os
 import pandas as pd
 import mlflow
 
+from src.constants import models
 from src.preprocess import preprocess
 
 
@@ -25,3 +26,9 @@ def test_preprocess():
     result = pd.read_csv(preprocess_train_destination)
 
     pd.testing.assert_frame_equal(result, expected, check_dtype=False)
+
+    try:
+        current_run_id = mlflow.active_run().info.run_id
+        mlflow.sklearn.load_model(f"runs:/{str(current_run_id)}/{models.PREPROCESSING_PIPELINE}")
+    except IOError:
+        raise AssertionError("The preprocessing pipeline has not been saved with mlflow")
