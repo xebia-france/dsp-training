@@ -49,3 +49,4 @@ if __name__ == "__main__":
     # TODO: model registry.
     # TODO: Nettoyer les tests.
     # TODO: Rajouter des tests notamment sur le mécanisme de récupération du dernier preprocessing_pipeline.
+    # TODO: revoir les README

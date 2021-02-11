@@ -14,11 +14,11 @@ is_running_test = eval(os.getenv("IS_RUNNING_TEST", "False"))
 
 # TODO: améliorer avec pathlib ?
 PROJECT_ROOT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..",)
-# data path will be /data for project and /tests/free_integration_test/data for tests
+# data path will be /data for project and /tests/integration_test/data for tests
 if not is_running_test:
     DATA_PATH = create_folder(os.path.join(PROJECT_ROOT_PATH, "data"))
 else:
-    DATA_PATH = create_folder(os.path.join(PROJECT_ROOT_PATH, "tests", "free_integration_test", "data_test"))
+    DATA_PATH = create_folder(os.path.join(PROJECT_ROOT_PATH, "tests", "integration_test", "data_test"))
 
 # TODO: revoir la gestion des logs
 # Set up writing of logs to today’s log file
@@ -38,8 +38,6 @@ logging.getLogger('').addHandler(console)
 RAW_DATA = create_folder(os.path.join(DATA_PATH, "raw"))
 INTERIM_DATA = create_folder(os.path.join(DATA_PATH, "interim"))
 OUTPUT_DATA = create_folder(os.path.join(DATA_PATH, "output"))
-MODELS = create_folder(os.path.join(DATA_PATH, "models"))
-PIPELINES = create_folder(os.path.join(DATA_PATH, "pipelines"))
 
 PLOTS = create_folder(os.path.join(OUTPUT_DATA, "plots"))
 
@@ -48,5 +46,6 @@ GDP_ENERGY_DATA_URL = "https://gitlab.com/VincentVillet/cookiecutter-data-fr/-/r
 LOANS = "loans.csv"
 TRAIN = "train.csv"
 TEST = "test.csv"
+TEST_WITH_PREDICTIONS = "test_with_predictions.csv"
 PREPROCESSED_TRAIN = "preprocessed_train.csv"
 PREPROCESSING_PIPELINE = "pipeline.joblib"

@@ -34,6 +34,11 @@ def evaluate_mlflow():
     logging.info("Computing performance metrics")
     y_pred = logistic_reg.predict(preprocessed_test)
 
+    logging.info("Saving predictions")
+    test_with_predictions_df = test_df.copy()
+    test_with_predictions_df["Predicted_Loan_Status"] = y_pred
+    test_with_predictions_df.to_csv(os.path.join(files.OUTPUT_DATA, files.TEST_WITH_PREDICTIONS), index=False)
+
     score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
 
     mlflow.log_metric("f1_score", score)

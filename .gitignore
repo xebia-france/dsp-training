@@ -8,6 +8,7 @@ dsp
 data
 mlruns
 data_test
+!/data_test/raw
 mlruns_test
 
 /tests/free_integration_test/data/*
