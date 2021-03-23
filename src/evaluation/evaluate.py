@@ -5,27 +5,20 @@ import logging
 
 import src.constants.files as files
 import src.constants.columns as c
-from src.logistic_reg.logistic_reg_train import LOGISTIC_REG_MODELS_PATH
+import src.constants.models as m
 from sklearn.metrics import f1_score
 
 
 def evaluate():
-    test_df = pd.read_csv(os.path.join(files.INTERIM_DATA, files.TEST))
+    model_name = m.LOGISTIC_REG_MODEL_NAME.replace('.joblib', '')
 
-    preprocessing_pipeline = load(os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE))
-    preprocessed_test = preprocessing_pipeline.transform(test_df)
-    y_test = test_df[c.Loans.Loan_Status].values
+    prediction_df = pd.read_csv(os.path.join(files.OUTPUT_DATA, f"{model_name}_{files.PREDICTIONS_TEST}"))
 
-    logistic_reg_model_names = [file for file in os.listdir(LOGISTIC_REG_MODELS_PATH) if "joblib" in file]
+    logging.info(f"Evaluating {model_name}")
 
-    for logistic_reg_model_name in logistic_reg_model_names:
-        logging.info(f"Evaluating {logistic_reg_model_name}")
-        logistic_reg = load(os.path.join(LOGISTIC_REG_MODELS_PATH, logistic_reg_model_name))
-        y_pred = logistic_reg.predict(preprocessed_test)
+    y_test = prediction_df[c.Loans.Loan_Status].values
+    y_pred = prediction_df["prediction"].values
 
-        score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
+    score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
 
-        logging.info(f"F1 score for model {logistic_reg_model_name} is {score}")
-
-        # TODO send evaluations to Mlflow
-
+    logging.info(f"F1 score for model {model_name} is {score}")

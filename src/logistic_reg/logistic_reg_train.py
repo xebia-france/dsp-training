@@ -6,6 +6,7 @@ import logging
 
 import src.constants.files as files
 import src.constants.columns as c
+import src.constants.models as m
 
 
 LOGISTIC_REG_MODELS_PATH = files.create_folder(os.path.join(files.MODELS, "logistic_reg"))
@@ -26,4 +27,4 @@ def logistic_reg_train():
         train_df[c.Loans.Loan_Status].values)
 
     logging.info("Saving model")
-    dump(logistic_reg, os.path.join(LOGISTIC_REG_MODELS_PATH, "logistic_regression.joblib"))
+    dump(logistic_reg, os.path.join(LOGISTIC_REG_MODELS_PATH, m.LOGISTIC_REG_MODEL_NAME))
