@@ -38,7 +38,6 @@ def main(bool_dict):
         evaluate()
 
 
-
 if __name__ == "__main__":
     bool_dict = {"load_and_split": True,
                  "preprocess": True,

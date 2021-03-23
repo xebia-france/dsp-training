@@ -16,8 +16,7 @@ OUTPUT_DATA = create_folder(os.path.join(DATA_PATH, "output"))
 MODELS = create_folder(os.path.join(DATA_PATH, "models"))
 PIPELINES = create_folder(os.path.join(DATA_PATH, "pipelines"))
 
-# TODO: put google-cloud bucket url
-LOANS_DATA_URL = "https://gitlab.com/VincentVillet/cookiecutter-data-fr/-/raw/master/world_gdp_and_energy_consumption.csv"
+LOANS_DATA_URL = "https://storage.googleapis.com/formation-dsp-data/loans.csv"
 
 LOANS = "loans.csv"
 TRAIN = "train.csv"
