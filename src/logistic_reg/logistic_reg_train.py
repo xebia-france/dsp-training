@@ -23,8 +23,9 @@ def logistic_reg_train():
     logistic_reg = LogisticRegression()
     
     logistic_reg.fit(
-        train_df.drop(c.Loans.Loan_Status, axis=1).values,
-        train_df[c.Loans.Loan_Status].values)
+        train_df.drop(c.Loans.target(), axis=1).values,
+        train_df[c.Loans.target()].values
+    )
 
     logging.info("Saving model")
     dump(logistic_reg, os.path.join(LOGISTIC_REG_MODELS_PATH, m.LOGISTIC_REG_MODEL_NAME))

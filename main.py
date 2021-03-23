@@ -16,7 +16,7 @@ def main(bool_dict):
     useful to re-run all steps but model training steps if they are already done for example.
     :return:
     """
-    download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
+    download_file_from_url(files.LOANS_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
 
     if bool_dict["load_and_split"]:
         load_and_split_data()

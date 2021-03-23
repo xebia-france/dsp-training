@@ -1,5 +1,4 @@
 import os
-from joblib import load
 import pandas as pd
 import logging
 
@@ -16,7 +15,7 @@ def evaluate():
 
     logging.info(f"Evaluating {model_name}")
 
-    y_test = prediction_df[c.Loans.Loan_Status].values
+    y_test = prediction_df[c.Loans.target()].values
     y_pred = prediction_df["prediction"].values
 
     score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)

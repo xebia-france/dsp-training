@@ -18,10 +18,10 @@ def predict():
     logistic_reg = load(os.path.join(LOGISTIC_REG_MODELS_PATH, m.LOGISTIC_REG_MODEL_NAME))
     y_pred = logistic_reg.predict(preprocessed_test)
 
-    preprocessed_test["prediction"] = y_pred
+    test_df["prediction"] = y_pred
 
     model_name = m.LOGISTIC_REG_MODEL_NAME.replace('.joblib', '')
-    preprocessed_test.to_csv(os.path.join(files.OUTPUT_DATA, f"{model_name}_{files.PREDICTIONS_TEST}"))
+    test_df.to_csv(os.path.join(files.OUTPUT_DATA, f"{model_name}_{files.PREDICTIONS_TEST}"))
 
 
 

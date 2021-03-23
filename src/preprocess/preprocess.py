@@ -42,7 +42,7 @@ def preprocess(training_file_path, preprocessed_train_destination, preprocessing
     one_hot_cols = retrieve_one_hot_columns(pipeline, cat_features)
     preprocessed_train_df = pd.DataFrame(preprocessed_train, columns=num_features + one_hot_cols)
 
-    preprocessed_train_df[c.Loans.Loan_Status] = train_df[c.Loans.Loan_Status]
+    preprocessed_train_df[c.Loans.target()] = train_df[c.Loans.target()]
 
     logging.info("Saving the preprocessed train dataframe")
     preprocessed_train_df.to_csv(preprocessed_train_destination, index=False)
