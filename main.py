@@ -1,7 +1,7 @@
 import os
 
 from src.utils import download_file_from_url
-from src.preprocess import preprocess, split_train_test
+from src.preprocess.preprocess import preprocess, load_and_split_data
 from src.logistic_reg.logistic_reg_train import logistic_reg_train
 from src.evaluation.evaluate import evaluate
 import src.constants.files as files
@@ -17,8 +17,8 @@ def main(bool_dict):
     """
     download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
 
-    if bool_dict["split"]:
-        split_train_test()
+    if bool_dict["load_and_split"]:
+        load_and_split_data()
 
     if bool_dict["preprocess"]:
         preprocess(
@@ -35,7 +35,7 @@ def main(bool_dict):
 
 
 if __name__ == "__main__":
-    bool_dict = {"split": True,
+    bool_dict = {"load_and_split": True,
                  "preprocess": True,
                  "logistic_reg_train": True,
                  "evaluate": True}

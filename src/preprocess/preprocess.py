@@ -13,6 +13,15 @@ import src.constants.columns as c
 import src.constants.files as files
 
 
+def load_and_split_data(test_size=0.2, random_state=1):
+    loans_df = pd.read_csv(os.path.join(files.RAW_DATA, files.LOANS))
+
+    train_df, test_df = train_test_split(loans_df, test_size=test_size, random_state=random_state)
+
+    train_df.to_csv(os.path.join(files.INTERIM_DATA, files.TRAIN), index=False)
+    test_df.to_csv(os.path.join(files.INTERIM_DATA, files.TEST), index=False)
+
+
 def preprocess(training_file_path, preprocessed_train_destination, preprocessing_pipeline_destination):
     """
     Take training_file_path as input and write preprocessed data into preprocessed_train_destination.
@@ -72,14 +81,4 @@ def retrieve_one_hot_columns(pipeline, cat_features):
     for i in range(len(raw_one_hot_cols)):
         one_hot_col_name = cat_features[int(raw_one_hot_cols[i][1])] + raw_one_hot_cols[i][2:]
         one_hot_cols.append(one_hot_col_name)
-
     return one_hot_cols
-
-
-def split_train_test(test_size=0.2, random_state=1):
-    loans_df = pd.read_csv(os.path.join(files.RAW_DATA, files.LOANS))
-
-    train_df, test_df = train_test_split(loans_df, test_size=test_size, random_state=random_state)
-
-    train_df.to_csv(os.path.join(files.INTERIM_DATA, files.TRAIN), index=False)
-    test_df.to_csv(os.path.join(files.INTERIM_DATA, files.TEST), index=False)

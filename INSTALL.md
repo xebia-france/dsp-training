@@ -37,7 +37,3 @@ Note: pour les utilisateurs de Windows, la commande d'activation de l'environnem
 Installer les dépendances python 
 
     pip3 install -r requirements.txt
-
-Tester l'installation
-
-    python -m pytest tests

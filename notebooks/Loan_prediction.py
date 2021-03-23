@@ -6,11 +6,11 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.9.1
+#       jupytext_version: 1.10.3
 #   kernelspec:
-#     display_name: Python (dsp-training)
+#     display_name: dsp
 #     language: python
-#     name: dsp-training
+#     name: dsp
 # ---
 
 # +
@@ -37,13 +37,13 @@ from sklearn.compose import ColumnTransformer, make_column_transformer
 from sklearn.metrics import f1_score
 # -
 
-# # Load data
+# # Load and split data
 
 loans_df = pd.read_csv(os.path.join(files.RAW_DATA, files.LOANS))
 
 train_df, test_df = train_test_split(loans_df, test_size=0.2, random_state=1)
 
-# # Preprocessing
+# # Exploration
 
 train_df.describe()
 
@@ -59,12 +59,11 @@ def null_values_stats(input_df):
 
 null_values_stats(train_df)
 
+# # Preprocess
 # ## Fill missing values
 
-num_features = c.Loans.num_features()
-cat_features = c.Loans.cat_features()
-
-cat_features
+num_features = ['Credit_History', 'ApplicantIncome', 'CoapplicantIncome', 'LoanAmount', 'Loan_Amount_Term']
+cat_features = ['Dependents', 'Gender', 'Married', 'Education', 'Self_Employed', 'Education']
 
 # +
 pipeline = ColumnTransformer([
@@ -78,14 +77,20 @@ pipeline = ColumnTransformer([
 )
 
 preprocessed_train = pipeline.fit_transform(train_df)
+
+
 # -
 
-raw_one_hot_cols = pipeline.named_transformers_["cat_pipeline"].named_steps["one_hot_encoder"].get_feature_names()
-one_hot_cols = []
-for i in range(len(raw_one_hot_cols)):
-    one_hot_col_name = cat_features[int(raw_one_hot_cols[i][1])] + raw_one_hot_cols[i][2:]
-    one_hot_cols.append(one_hot_col_name)
+def retrieve_one_hot_columns(pipeline, cat_features):
+    raw_one_hot_cols = pipeline.named_transformers_["cat_pipeline"].named_steps["one_hot_encoder"].get_feature_names()
+    one_hot_cols = []
+    for i in range(len(raw_one_hot_cols)):
+        one_hot_col_name = cat_features[int(raw_one_hot_cols[i][1])] + raw_one_hot_cols[i][2:]
+        one_hot_cols.append(one_hot_col_name)
+    return one_hot_cols
 
+
+one_hot_cols = retrieve_one_hot_columns(pipeline, cat_features)
 preprocessed_train_df = pd.DataFrame(preprocessed_train, columns=num_features + one_hot_cols)
 
 preprocessed_train_df.head()
