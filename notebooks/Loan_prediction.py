@@ -6,11 +6,11 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.10.3
+#       jupytext_version: 1.11.0
 #   kernelspec:
-#     display_name: dsp
+#     display_name: Python (dsp-training)
 #     language: python
-#     name: dsp
+#     name: venv
 # ---
 
 # +
@@ -94,12 +94,6 @@ one_hot_cols = retrieve_one_hot_columns(pipeline, cat_features)
 preprocessed_train_df = pd.DataFrame(preprocessed_train, columns=num_features + one_hot_cols)
 
 preprocessed_train_df.head()
-
-# # Exploration
-
-sns.countplot(y="Gender", hue="Loan_Status", data= loans_df)
-
-sns.heatmap(loans_df.corr())
 
 # # Modeling
 

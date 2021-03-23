@@ -12,10 +12,9 @@ LOGISTIC_REG_MODELS_PATH = files.create_folder(os.path.join(files.MODELS, "logis
 
 
 def logistic_reg_train():
-    # TODO: documentation
     """
-
-    
+    Read preprocessed train data, instatiate model and fit on train data
+    Save model
     :return: None
     """
     train_df = pd.read_csv(os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN))
@@ -26,6 +25,5 @@ def logistic_reg_train():
         train_df.drop(c.Loans.Loan_Status, axis=1).values,
         train_df[c.Loans.Loan_Status].values)
 
-    # TODO: utiliser MlFlow
     logging.info("Saving model")
-    dump(logistic_reg, os.path.join(LOGISTIC_REG_MODELS_PATH, f"logistic_regression.joblib"))
+    dump(logistic_reg, os.path.join(LOGISTIC_REG_MODELS_PATH, "logistic_regression.joblib"))

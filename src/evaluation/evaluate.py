@@ -28,3 +28,4 @@ def evaluate():
         logging.info(f"F1 score for model {logistic_reg_model_name} is {score}")
 
         # TODO send evaluations to Mlflow
+

@@ -4,6 +4,7 @@ from src.utils import download_file_from_url
 from src.preprocess.preprocess import preprocess, load_and_split_data
 from src.logistic_reg.logistic_reg_train import logistic_reg_train
 from src.evaluation.evaluate import evaluate
+from src.predict.predict import predict
 import src.constants.files as files
 
 
@@ -30,13 +31,19 @@ def main(bool_dict):
     if bool_dict["logistic_reg_train"]:
         logistic_reg_train()
 
+    if bool_dict["predict"]:
+        predict()
+
     if bool_dict["evaluate"]:
         evaluate()
+
 
 
 if __name__ == "__main__":
     bool_dict = {"load_and_split": True,
                  "preprocess": True,
                  "logistic_reg_train": True,
-                 "evaluate": True}
+                 "predict":True,
+                 "evaluate": True
+                 }
     main(bool_dict)
