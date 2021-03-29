@@ -46,7 +46,8 @@ class IntegrationTest(TestCase):
         # Then
         expected = pd.read_csv(os.path.join(LOCAL_ROOT, "expected_predictions.csv"))
         # Read result from csv to avoid problems with nan
-        result = pd.read_csv(files.PREDICTIONS_TEST)
+        # TODO 5 : charger le dataframe contenant les prédictions.
+        result = NotImplementedError()
 
         pd.testing.assert_frame_equal(result, expected, check_dtype=False)
 

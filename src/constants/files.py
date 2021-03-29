@@ -23,10 +23,10 @@ INTERIM_DATA = create_folder(os.path.join(DATA_PATH, "interim"))
 OUTPUT_DATA = create_folder(os.path.join(DATA_PATH, "output"))
 MODELS = create_folder(os.path.join(DATA_PATH, "models"))
 
-if not is_running_test:
-    LOANS_DATA_URL = "https://ps-dsp-training.s3.eu-west-1.amazonaws.com/loans.csv"
-else:
-    LOANS_DATA_URL = "https://ps-dsp-training.s3.eu-west-1.amazonaws.com/loans_test.csv"
+
+# TODO 4 : si un test est en cours, alors charger le fichier loans_test.csv dans le même bucket S3.
+LOANS_DATA_URL = "https://ps-dsp-training.s3.eu-west-1.amazonaws.com/loans.csv"
+
 
 LOANS = os.path.join(RAW_DATA, "loans.csv")
 
