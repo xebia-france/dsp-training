@@ -13,3 +13,9 @@ __pycache__
 .pytest_cache
 
 mlruns
+mlruns_test
+
+password.txt
+
+infra/.terraform
+infra/terraform.tfstate*

@@ -1,23 +1,26 @@
-import os
 import pandas as pd
 import logging
 
-import src.constants.files as files
 import src.constants.columns as c
 import src.constants.models as m
 from sklearn.metrics import f1_score
 
 
-def evaluate():
-    model_name = m.LOGISTIC_REG_MODEL_NAME.replace('.joblib', '')
+def evaluate(prediction_file_path):
+    """
+    Evaluate the performance of the model on test data.
 
-    prediction_df = pd.read_csv(os.path.join(files.OUTPUT_DATA, f"{model_name}_{files.PREDICTIONS_TEST}"))
+    :param prediction_file_path: path to prediction data.
 
-    logging.info(f"Evaluating {model_name}")
+    :return: None
+    """
+    prediction_df = pd.read_csv(prediction_file_path)
+
+    logging.info(f"Evaluating {m.LOGISTIC_REG_MODEL_NAME}")
 
     y_test = prediction_df[c.Loans.target()].values
     y_pred = prediction_df["prediction"].values
 
     score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
 
-    logging.info(f"F1 score for model {model_name} is {score}")
+    logging.info(f"F1 score for model {m.LOGISTIC_REG_MODEL_NAME} is {score}")

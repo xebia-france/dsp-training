@@ -6,11 +6,11 @@
 #       extension: .py
 #       format_name: light
 #       format_version: '1.5'
-#       jupytext_version: 1.11.0
+#       jupytext_version: 1.10.3
 #   kernelspec:
-#     display_name: Python (dsp-training)
+#     display_name: dsp
 #     language: python
-#     name: venv
+#     name: dsp
 # ---
 
 # +
@@ -40,6 +40,8 @@ from sklearn.metrics import f1_score
 # # Load and split data
 
 loans_df = pd.read_csv(os.path.join(files.RAW_DATA, files.LOANS))
+
+loans_df.head()
 
 train_df, test_df = train_test_split(loans_df, test_size=0.2, random_state=1)
 
@@ -113,3 +115,5 @@ ypred = model.predict(X_test)
 
 evaluation = f1_score(y_test, ypred, pos_label="Y")
 evaluation
+
+

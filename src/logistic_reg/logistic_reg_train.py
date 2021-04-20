@@ -1,24 +1,21 @@
 import pandas as pd
-import os
 from sklearn.linear_model import LogisticRegression
 from joblib import dump
 import logging
 
-import src.constants.files as files
 import src.constants.columns as c
-import src.constants.models as m
 
 
-LOGISTIC_REG_MODELS_PATH = files.create_folder(os.path.join(files.MODELS, "logistic_reg"))
-
-
-def logistic_reg_train():
+def logistic_reg_train(preprocessed_train_path, logistic_reg_model_path):
     """
-    Read preprocessed train data, instatiate model and fit on train data
-    Save model
+    Read preprocessed train data, instantiate model, fit on train data and save model.
+
+    :param preprocessed_train_path: path to preprocessed training data.
+    :param logistic_reg_model_path: path to saved logistic reg model.
+
     :return: None
     """
-    train_df = pd.read_csv(os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN))
+    train_df = pd.read_csv(preprocessed_train_path)
 
     logistic_reg = LogisticRegression()
     
@@ -28,4 +25,4 @@ def logistic_reg_train():
     )
 
     logging.info("Saving model")
-    dump(logistic_reg, os.path.join(LOGISTIC_REG_MODELS_PATH, m.LOGISTIC_REG_MODEL_NAME))
+    dump(logistic_reg, logistic_reg_model_path)

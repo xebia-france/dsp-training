@@ -19,23 +19,27 @@ def main(bool_dict):
     download_file_from_url(files.LOANS_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
 
     if bool_dict["load_and_split"]:
-        load_and_split_data()
+        load_and_split_data(raw_data_path=files.LOANS,
+                            training_file_path=files.TRAIN,
+                            test_file_path=files.TEST)
 
     if bool_dict["preprocess"]:
-        preprocess(
-            training_file_path=os.path.join(files.INTERIM_DATA, files.TRAIN),
-            preprocessed_train_destination=os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN),
-            preprocessing_pipeline_destination=os.path.join(files.PIPELINES, files.PREPROCESSING_PIPELINE)
-        )
+        preprocess(training_file_path=files.TRAIN,
+                   preprocessed_train_path=files.PREPROCESSED_TRAIN,
+                   preprocessing_pipeline_path=files.PREPROCESSING_PIPELINE)
 
     if bool_dict["logistic_reg_train"]:
-        logistic_reg_train()
+        logistic_reg_train(preprocessed_train_path=files.PREPROCESSED_TRAIN,
+                           logistic_reg_model_path=files.LOGISTIC_REG_MODEL)
 
     if bool_dict["predict"]:
-        predict()
+        predict(test_file_path=files.TEST,
+                preprocessing_pipeline_path=files.PREPROCESSING_PIPELINE,
+                logistic_reg_model_path=files.LOGISTIC_REG_MODEL,
+                prediction_file_path=files.PREDICTIONS_TEST)
 
     if bool_dict["evaluate"]:
-        evaluate()
+        evaluate(prediction_file_path=files.PREDICTIONS_TEST)
 
 
 if __name__ == "__main__":

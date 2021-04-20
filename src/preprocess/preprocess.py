@@ -1,5 +1,4 @@
 import logging
-import os
 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -10,21 +9,35 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 import src.constants.columns as c
-import src.constants.files as files
 
 
-def load_and_split_data(test_size=0.2, random_state=1):
-    loans_df = pd.read_csv(os.path.join(files.RAW_DATA, files.LOANS))
+def load_and_split_data(raw_data_path, training_file_path, test_file_path, test_size=0.2, random_state=1):
+    """
+    Split raw input data into training and test data.
+
+    :param raw_data_path: path to raw data.
+    :param training_file_path: path to training data.
+    :param test_file_path: path to test data.
+    :param test_size: float between 0 and 1 specifying the share of test data.
+    :param random_state: seed of the randomness generator
+
+    :return: None.
+    """
+    loans_df = pd.read_csv(raw_data_path)
 
     train_df, test_df = train_test_split(loans_df, test_size=test_size, random_state=random_state)
 
-    train_df.to_csv(os.path.join(files.INTERIM_DATA, files.TRAIN), index=False)
-    test_df.to_csv(os.path.join(files.INTERIM_DATA, files.TEST), index=False)
+    train_df.to_csv(training_file_path, index=False)
+    test_df.to_csv(test_file_path, index=False)
 
 
-def preprocess(training_file_path, preprocessed_train_destination, preprocessing_pipeline_destination):
+def preprocess(training_file_path, preprocessed_train_path, preprocessing_pipeline_path):
     """
-    Take training_file_path as input and write preprocessed data into preprocessed_train_destination.
+    Take training_file_path as input and write preprocessed data into preprocessed_train_path.
+
+    :param training_file_path:  path to training data.
+    :param preprocessed_train_path: path to preprocessed training data.
+    :param preprocessing_pipeline_path: path to saved preprocessing pipeline.
 
     :return: None.
     """
@@ -45,10 +58,10 @@ def preprocess(training_file_path, preprocessed_train_destination, preprocessing
     preprocessed_train_df[c.Loans.target()] = train_df[c.Loans.target()]
 
     logging.info("Saving the preprocessed train dataframe")
-    preprocessed_train_df.to_csv(preprocessed_train_destination, index=False)
+    preprocessed_train_df.to_csv(preprocessed_train_path, index=False)
 
     logging.info("Saving the preprocessing pipeline")
-    dump(pipeline, preprocessing_pipeline_destination)
+    dump(pipeline, preprocessing_pipeline_path)
 
 
 def fit_preprocessing_pipeline(train_df, num_features, cat_features):
