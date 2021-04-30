@@ -9,6 +9,7 @@ data
 /tests/integration_test/data_test/*
 #Keep raw data for integration test (see tests/integration_test/README.md for more explanations).
 !/tests/integration_test/data_test/raw
+logs
 
 mlruns
 mlruns_test
@@ -20,3 +21,10 @@ __pycache__
 .pytest_cache
 
 airflow
+!airflow/dags
+
+# Private keys for connecting to EC2 instances
+*.pem
+
+# databricks password
+password.txt
