@@ -12,7 +12,7 @@ data_test
 mlruns_test
 
 /tests/free_integration_test/data/*
-# Keep raw data for free integration test (see tests/README.md for more explanations).
+#Keep raw data for free integration test (see tests/README.md for more explanations).
 !/tests/free_integration_test/data/raw
 
 __pycache__

@@ -13,8 +13,6 @@ Tester l'installation de `Python3` et `virtualenv` avec ces commandes
     python3 --version
     pip3 --version
     virtualenv --version
-    
-Note: selon votre installation de python, vous pouvez remplacer les commandes `python3` et `pip3` par `python` et `pip`
 
 Installer `virtualenv` si besoin avec la commande :  `pip3 install virtualenv`
 
