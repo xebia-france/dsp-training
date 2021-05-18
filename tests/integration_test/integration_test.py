@@ -18,7 +18,7 @@ def setup_mlruns(mlruns_path):
 
 
 def test_main_runs():
-    mlruns_path = f"{LOCAT_ROOT}/mlruns_test"
+    mlruns_path = os.path.join("file:", LOCAT_ROOT, "mlruns_test").replace("C:", "")
     setup_mlruns(mlruns_path)
 
     bool_dict = {"split": True,
@@ -31,7 +31,7 @@ def test_main_runs():
 
 
 def test_main():
-    mlruns_path = f"{LOCAT_ROOT}/mlruns_test"
+    mlruns_path = os.path.join("file:", LOCAT_ROOT, "mlruns_test").replace("C:", "")
     setup_mlruns(mlruns_path)
 
     bool_dict = {"split": True,
@@ -51,7 +51,7 @@ def test_main():
 
 
 def test_main_runs_with_preprocess_false():
-    mlruns_path = f"{LOCAT_ROOT}/mlruns_test"
+    mlruns_path = os.path.join("file:", LOCAT_ROOT, "mlruns_test").replace("C:", "")
     setup_mlruns(mlruns_path)
 
     bool_dict = {"split": True,

@@ -10,7 +10,7 @@ LOCAT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
 
 def test_preprocess():
-    mlflow.set_tracking_uri(f"{LOCAT_ROOT}/mlruns_test")
+    mlflow.set_tracking_uri(os.path.join("file:", LOCAT_ROOT, "mlruns_test").replace("C:", ""))
     # Given
     preprocess_train_destination = os.path.join(LOCAT_ROOT, "result_test.csv")
 
