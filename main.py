@@ -21,6 +21,7 @@ def main(bool_dict):
     download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
 
     today_str = str(datetime.date(datetime.now()))
+    mlflow.set_experiment(files.MLFLOW_EXPERIMENT_NAME)
     with mlflow.start_run(run_name=today_str):
         if bool_dict["split"]:
             split_train_test()
@@ -40,7 +41,7 @@ def main(bool_dict):
 
 if __name__ == "__main__":
     bool_dict = {"split": True,
-                 "preprocess": True,
+                 "preprocess": False,
                  "logistic_reg_train": True,
                  "evaluate_mlflow": True}
 

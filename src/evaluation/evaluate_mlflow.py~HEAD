@@ -9,9 +9,13 @@ from mlflow.entities import ViewType
 from mlflow.tracking import MlflowClient
 
 import src.constants.files as files
+<<<<<<< HEAD:src/evaluation/evaluate_mlflow.py
 import src.constants.columns as c
 from src.constants import models
 from sklearn.metrics import f1_score
+=======
+
+>>>>>>> 8cc7091 (make function load_latest_preprocessing_pipeline run also with tracking server):src/predict/predict.py
 
 
 def evaluate_mlflow():
@@ -19,10 +23,14 @@ def evaluate_mlflow():
     current_run_id = mlflow.active_run().info.run_id
 
     logging.info("Loading preprocessing pipeline")
+<<<<<<< HEAD:src/evaluation/evaluate_mlflow.py
 
+    preprocessing_pipeline, pp_run_id = load_latest_preprocessing_pipeline(models.PREPROCESSING_PIPELINE)
+
+=======
     preprocessing_pipeline, pp_run_id = load_latest_preprocessing_pipeline(
-        models.PREPROCESSING_PIPELINE, files.MLFLOW_EXPERIMENT_NAME)
-
+        preprocessing_pipeline_name, files.MLFLOW_EXPERIMENT_NAME)
+>>>>>>> 8cc7091 (make function load_latest_preprocessing_pipeline run also with tracking server):src/predict/predict.py
     if pp_run_id != current_run_id:
         logging.info("Using preprocessing pipeline saved in a previous run")
         mlflow.log_param("preprocessing_pipeline_run_id", pp_run_id)
@@ -44,10 +52,14 @@ def evaluate_mlflow():
 
     mlflow.log_metric("f1_score", score)
 
+<<<<<<< HEAD:src/evaluation/evaluate_mlflow.py
 
+def load_latest_preprocessing_pipeline(preprocessing_pipeline):
+=======
 def load_latest_preprocessing_pipeline(preprocessing_pipeline_name, experiment_name):
     experiment_id = get_experiment_id(experiment_name)
 
+>>>>>>> 8cc7091 (make function load_latest_preprocessing_pipeline run also with tracking server):src/predict/predict.py
     runs = MlflowClient().search_runs(
         experiment_ids=str(experiment_id),
         run_view_type=ViewType.ACTIVE_ONLY,
@@ -58,6 +70,15 @@ def load_latest_preprocessing_pipeline(preprocessing_pipeline_name, experiment_n
         run_id = run.info.run_id
         artifact_uri = run.info.artifact_uri
         try:
+<<<<<<< HEAD:src/evaluation/evaluate_mlflow.py
+            return mlflow.sklearn.load_model(f"runs:/{str(run_id)}/{preprocessing_pipeline}"), run_id
+        except IOError:
+            continue
+
+    raise Exception(
+        f"Could not find a preprocessing pipeline named {models.PREPROCESSING_PIPELINE} in current and previous runs"
+    )
+=======
             return mlflow.sklearn.load_model(f"{artifact_uri}/{preprocessing_pipeline_name}"), run_id
         except:
             continue
@@ -72,3 +93,4 @@ def get_experiment_id(experiment_name):
         if experiment.name == experiment_name:
             return experiment.experiment_id
     raise Exception(f"Could not find and experiment id for experiment {experiment_name}")
+>>>>>>> 8cc7091 (make function load_latest_preprocessing_pipeline run also with tracking server):src/predict/predict.py

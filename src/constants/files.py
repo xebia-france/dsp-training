@@ -49,3 +49,5 @@ TEST = "test.csv"
 TEST_WITH_PREDICTIONS = "test_with_predictions.csv"
 PREPROCESSED_TRAIN = "preprocessed_train.csv"
 PREPROCESSING_PIPELINE = "pipeline.joblib"
+
+MLFLOW_EXPERIMENT_NAME = "mlflow-experiment"
