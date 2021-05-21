@@ -109,3 +109,12 @@ Lancer le scheduler
     airflow scheduler
 
 Documentation Airflow sur AWS: https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html
+
+### Configuration d'un serveur SMTP pour que airflow puisse envoyer des emails
+
+editer le fichier `airflow.cfg` à la racine du dossier airflow  pour 
+trouver la configuration `smtp_starttls = True` et la passer à `False`
+
+lancer dans une autre fenêtre un serveur d'email en local de debug où airflow enverra les emails
+
+    sudo python -m smtpd -n -c DebuggingServer localhost:25
