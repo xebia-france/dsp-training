@@ -2,7 +2,6 @@ from enum import Enum
 
 
 class Loans(str, Enum):
-    # TODO: mettre les noms de variables en majuscule ?
     Loan_Status = "Loan_Status"
     Credit_History = "Credit_History"
     Self_Employed = "Self_Employed"
@@ -16,9 +15,7 @@ class Loans(str, Enum):
     ApplicantIncome = "ApplicantIncome"
     CoapplicantIncome = "CoapplicantIncome"
     Property_Area = "Property_Area"
-    # TODO: documentation of variables
 
-    # TODO remove the .value
     @classmethod
     def num_features(cls):
         return [

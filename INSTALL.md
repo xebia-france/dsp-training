@@ -25,7 +25,7 @@ Cloner le projet en local
 
 Créer un environnement virtuel et l'activer
 
-    virtualenv venv --python=python3
+    virtualenv venv --python=python3.7
     source venv/bin/activate
     
 Note: pour les utilisateurs de Windows, la commande d'activation de l'environnement virtuel est
@@ -39,3 +39,7 @@ Installer les dépendances python
 Tester l'installation
 
     python -m pytest tests
+
+Lancer le projet
+
+    python main.py

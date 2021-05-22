@@ -18,7 +18,7 @@ def main(bool_dict):
     useful to re-run all steps but model training steps if they are already done for example.
     :return:
     """
-    download_file_from_url(files.GDP_ENERGY_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
+    download_file_from_url(files.LOANS_DATA_URL, os.path.join(files.RAW_DATA, files.LOANS))
 
     today_str = str(datetime.date(datetime.now()))
     mlflow.set_experiment(files.MLFLOW_EXPERIMENT_NAME)
@@ -41,13 +41,9 @@ def main(bool_dict):
 
 if __name__ == "__main__":
     bool_dict = {"split": True,
-                 "preprocess": False,
+                 "preprocess": True,
                  "logistic_reg_train": True,
                  "evaluate_mlflow": True}
 
     main(bool_dict)
 
-    # TODO: model registry.
-    # TODO: Nettoyer les tests.
-    # TODO: Rajouter des tests notamment sur le mécanisme de récupération du dernier preprocessing_pipeline.
-    # TODO: revoir les README

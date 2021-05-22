@@ -12,7 +12,6 @@ def create_folder(path):
 # equals True when running test with pytest because of environment variable specified in pytest.ini
 is_running_test = eval(os.getenv("IS_RUNNING_TEST", "False"))
 
-# TODO: améliorer avec pathlib ?
 PROJECT_ROOT_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..",)
 # data path will be /data for project and /tests/integration_test/data for tests
 if not is_running_test:
@@ -20,7 +19,6 @@ if not is_running_test:
 else:
     DATA_PATH = create_folder(os.path.join(PROJECT_ROOT_PATH, "tests", "integration_test", "data_test"))
 
-# TODO: revoir la gestion des logs
 # Set up writing of logs to today’s log file
 LOG_PATH = create_folder(os.path.join(DATA_PATH, "logs"))
 
@@ -41,7 +39,10 @@ OUTPUT_DATA = create_folder(os.path.join(DATA_PATH, "output"))
 
 PLOTS = create_folder(os.path.join(OUTPUT_DATA, "plots"))
 
-GDP_ENERGY_DATA_URL = "https://gitlab.com/VincentVillet/cookiecutter-data-fr/-/raw/master/world_gdp_and_energy_consumption.csv"
+if not is_running_test:
+    LOANS_DATA_URL = "https://storage.googleapis.com/formation-dsp-data/loans.csv"
+else:
+    LOANS_DATA_URL = "https://storage.googleapis.com/formation-dsp-data/loans_test.csv"
 
 LOANS = "loans.csv"
 TRAIN = "train.csv"

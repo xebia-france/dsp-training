@@ -12,10 +12,9 @@ import src.constants.models as models
 
 
 def logistic_reg_train():
-    # TODO: documentation
     """
+    Read preprocessed train data, instantiate model, fit on train data and save model.
 
-    
     :return: None
     """
     train_df = pd.read_csv(os.path.join(files.INTERIM_DATA, files.PREPROCESSED_TRAIN))
