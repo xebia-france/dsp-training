@@ -51,7 +51,6 @@ train_df.describe()
 
 train_df.shape
 
-# TODO veut-on suivre cette métrique ?
 def null_values_stats(input_df):
     total = input_df.isnull().sum().sort_values(ascending=False)
     percent = (input_df.isnull().sum()/input_df.isnull().count()).sort_values(ascending=False)
