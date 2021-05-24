@@ -7,23 +7,23 @@ from src.preprocess import preprocess
 from src.constants import files
 
 
-LOCAT_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+LOCAL_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)))
 
 
 def test_preprocess():
-    mlflow.set_tracking_uri(os.path.join("file:", LOCAT_ROOT, "mlruns_test").replace("C:", ""))
+    mlflow.set_tracking_uri(os.path.join("file:", LOCAL_ROOT, "mlruns_test").replace("C:", ""))
     mlflow.set_experiment(files.MLFLOW_EXPERIMENT_NAME)
     # Given
-    preprocess_train_destination = os.path.join(LOCAT_ROOT, "result_test.csv")
+    preprocess_train_destination = os.path.join(LOCAL_ROOT, "result_test.csv")
 
     # When
     preprocess(
-        training_file_path=os.path.join(LOCAT_ROOT, "loans_test.csv"),
+        training_file_path=os.path.join(LOCAL_ROOT, "loans_test.csv"),
         preprocessed_train_destination=preprocess_train_destination
     )
 
     # Then
-    expected = pd.read_csv(os.path.join(LOCAT_ROOT, "expected.csv"))
+    expected = pd.read_csv(os.path.join(LOCAL_ROOT, "expected.csv"))
     # Read result from csv to avoid problems with nan
     result = pd.read_csv(preprocess_train_destination)
 
