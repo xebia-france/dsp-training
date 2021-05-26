@@ -19,11 +19,11 @@ def predict(test_file_path, preprocessing_pipeline_path, logistic_reg_model_path
     test_df = pd.read_csv(test_file_path)
 
     preprocessing_pipeline = load(preprocessing_pipeline_path)
-    preprocessed_test = preprocessing_pipeline.transform(test_df)
+    # TODO: preprocess test data
+    preprocessed_test = None
 
     logging.info(f"Make predictions with {m.LOGISTIC_REG_MODEL_NAME}")
-    logistic_reg = load(logistic_reg_model_path)
-    y_pred = logistic_reg.predict(preprocessed_test)
+    # TODO: load model and compute prediction
 
     test_df["prediction"] = y_pred
 

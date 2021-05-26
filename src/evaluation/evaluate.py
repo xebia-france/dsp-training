@@ -14,12 +14,7 @@ def evaluate(prediction_file_path):
 
     :return: None
     """
-    prediction_df = pd.read_csv(prediction_file_path)
-
-    logging.info(f"Evaluating {m.LOGISTIC_REG_MODEL_NAME}")
-
-    y_test = prediction_df[c.Loans.target()].values
-    y_pred = prediction_df["prediction"].values
+    # TODO: compute f1 score
 
     score = round(f1_score(y_test, y_pred, pos_label="Y"), 2)
 
