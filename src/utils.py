@@ -33,7 +33,8 @@ def load_pandas_df_from_s3(s3_bucket, filename):
     s3_resource = boto3.resource('s3')
 
     s3_resource.Object(s3_bucket, filename).download_file(Filename=filename.replace("/", "-"))
-    df = pd.read_csv(filename.replace("/", "-"))
+    # TODO 2: Compléter la fonction load_pandas_df_from_s3.
+    df = NotImplementedError()
     os.remove(filename.replace("/", "-"))
 
     return df

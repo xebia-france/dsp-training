@@ -37,13 +37,7 @@ with DAG(
         tags=['train'],
 ) as dag:
 
-    load_and_split = PythonOperator(
-        task_id='load_and_split',
-        python_callable=load_and_split_data,
-        op_kwargs={'raw_data_path': files.LOANS,
-                   'training_file_path': files.TRAIN,
-                   'test_file_path': files.TEST}
-    )
+    # TODO 3 : Ajoutez l'étape de load_and_split en utilisant le PythonOperator. Precisez les arguments.
 
     preprocess = PythonOperator(
         task_id='preprocess',
@@ -76,4 +70,4 @@ with DAG(
     )
 
 
-load_and_split >> preprocess >> model >> predict >> evaluate
+# TODO 4 : Définissez les dépendances entre les étapes du workflow grâce à l’opérateur >>.
