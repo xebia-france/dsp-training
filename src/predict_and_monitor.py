@@ -1,7 +1,7 @@
 import logging
 import os
 
-from monitor.monitor import monitor
+from monitor.monitor import monitor_loans_ratio, monitor_input_drift
 from predict.predict import predict
 import constants.files as files
 import constants.models as m
@@ -13,6 +13,14 @@ def predict_and_monitor():
     Launch predict on new file and monitor.
     """
     setup_logs()
+    logging.info("*********** Monitor input drift ***********")
+
+    try:
+        monitor_input_drift(test_file_path=files.NEW_LOANS,
+                            input_stats_history_path=files.INPUT_STATS_HISTORY)
+    except:
+        logging.warning("Input drift detected !")
+
     logging.info("*********** Predict on new loans data ***********")
 
     predict(test_file_path=files.NEW_LOANS,
@@ -22,9 +30,9 @@ def predict_and_monitor():
 
     logging.info("*********** Monitor new predictions and raise Exception if needed ***********")
 
-    monitor(prediction_file_path=files.NEW_PREDICTIONS,
-            prediction_history_path=files.PREDICTIONS_HISTORY,
-            metrics_history_path=files.METRICS_HISTORY)
+    monitor_loans_ratio(prediction_file_path=files.NEW_PREDICTIONS,
+                        prediction_history_path=files.PREDICTIONS_HISTORY,
+                        metrics_history_path=files.METRICS_HISTORY)
 
     upload_logs_to_s3()
 
