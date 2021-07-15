@@ -29,7 +29,7 @@ Créer un environnement virtuel et l'activer
 
     virtualenv venv --python=python3.7
     source venv/bin/activate
-    
+
 Note: pour les utilisateurs de Windows, la commande d'activation de l'environnement virtuel est
     
     venv\Scripts\activate.bat
@@ -37,6 +37,14 @@ Note: pour les utilisateurs de Windows, la commande d'activation de l'environnem
 Installer les dépendances python 
 
     pip3 install -r requirements.txt
+
+Ou si vous utilisez anaconda:
+
+    conda create -n dsp-training python=3.7
+    conda activate dsp-training
+    conda install ipykernel jupyter
+    pip install -r requirements.txt
+    python -m ipykernel install --user --name=dsp-training
 
 Tester l'installation
 
