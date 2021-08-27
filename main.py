@@ -25,7 +25,7 @@ def main(bool_dict):
 
     if bool_dict["preprocess"]:
         # TODO 1 : appeler la méthode preprocess() du module preprocess avec les arguments attendus :
-        #  training_file_path, preprocessed_train_destination et preprocessing_pipeline_destination
+        #  training_file_path, preprocessed_train_path et preprocessing_pipeline_path
         """
         Pour savoir quelles valeurs doivent prendre ces arguments, regarder ce que fait la méthode 
         load_and_split_data() et où elle sauvegarde les différentes données
