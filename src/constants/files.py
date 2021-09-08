@@ -18,7 +18,7 @@ MODELS = create_folder(os.path.join(DATA_PATH, "models"))
 PIPELINES = create_folder(os.path.join(DATA_PATH, "pipelines"))
 LOGISTIC_REG_MODELS_PATH = create_folder(os.path.join(MODELS, "logistic_reg"))
 
-LOANS_DATA_URL = "https://storage.googleapis.com/formation-dsp-data/loans.csv"
+LOANS_DATA_URL = "https://ps-dsp-training.s3.eu-west-1.amazonaws.com/loans.csv"
 
 LOANS = os.path.join(RAW_DATA, "loans.csv")
 
