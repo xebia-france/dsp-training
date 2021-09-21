@@ -1,58 +1,62 @@
 from main import main
 import os
 import pandas as pd
-from tests.utils import setup_mlruns
+from unittest import TestCase
+import shutil
+import mlflow
 
 from src.constants import files
 
 LOCAL_ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)))
+MLRUNS_PATH = files.create_folder(os.path.join("file:", LOCAL_ROOT, "mlruns_test").replace("C:", ""))
 
 
-def test_main_runs():
-    mlruns_path = os.path.join("file:", LOCAL_ROOT, "mlruns_test").replace("C:", "")
-    setup_mlruns(mlruns_path)
+class IntegrationTest(TestCase):
+    def setUp(self) -> None:
+        # Is executed at the beginning of each test run
+        mlflow.set_tracking_uri(MLRUNS_PATH)
+        
+    def tearDown(self) -> None:
+        # Is executed at the end of each test run
+        shutil.rmtree(os.path.join(MLRUNS_PATH, "0"))
 
-    bool_dict = {"load_and_split": True,
-                 "preprocess": True,
-                 "logistic_reg_train": True,
-                 "predict": True,
-                 "evaluate": True}
+    @staticmethod
+    def test_main_runs():
+        bool_dict = {"load_and_split": True,
+                     "preprocess": True,
+                     "logistic_reg_train": True,
+                     "predict": True,
+                     "evaluate": True}
 
-    main(bool_dict)
+        main(bool_dict)
 
+    @staticmethod
+    def test_main():
+        bool_dict = {"load_and_split": True,
+                     "preprocess": True,
+                     "logistic_reg_train": True,
+                     "predict": True,
+                     "evaluate": True}
 
-def test_main():
-    mlruns_path = os.path.join("file:", LOCAL_ROOT, "mlruns_test").replace("C:", "")
-    setup_mlruns(mlruns_path)
+        main(bool_dict)
 
-    bool_dict = {"load_and_split": True,
-                 "preprocess": True,
-                 "logistic_reg_train": True,
-                 "predict": True,
-                 "evaluate": True}
+        # Then
+        expected = pd.read_csv(os.path.join(LOCAL_ROOT, "expected_predictions.csv"))
+        # Read result from csv to avoid problems with nan
+        result = pd.read_csv(files.PREDICTIONS_TEST)
 
-    main(bool_dict)
+        pd.testing.assert_frame_equal(result, expected, check_dtype=False)
 
-    # Then
-    expected = pd.read_csv(os.path.join(LOCAL_ROOT, "expected_predictions.csv"))
-    # Read result from csv to avoid problems with nan
-    result = pd.read_csv(files.PREDICTIONS_TEST)
+    @staticmethod
+    def test_main_runs_with_preprocess_false():
+        bool_dict = {"load_and_split": True,
+                     "preprocess": True,
+                     "logistic_reg_train": True,
+                     "predict": True,
+                     "evaluate": True}
 
-    pd.testing.assert_frame_equal(result, expected, check_dtype=False)
+        main(bool_dict)
 
+        bool_dict["preprocess"] = False
 
-def test_main_runs_with_preprocess_false():
-    mlruns_path = os.path.join("file:", LOCAL_ROOT, "mlruns_test").replace("C:", "")
-    setup_mlruns(mlruns_path)
-
-    bool_dict = {"load_and_split": True,
-                 "preprocess": True,
-                 "logistic_reg_train": True,
-                 "predict": True,
-                 "evaluate": True}
-
-    main(bool_dict)
-
-    bool_dict["preprocess"] = False
-
-    main(bool_dict)
+        main(bool_dict)
