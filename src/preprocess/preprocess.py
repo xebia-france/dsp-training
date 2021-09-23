@@ -60,7 +60,7 @@ def preprocess(training_file_path, preprocessed_train_path, preprocessing_pipeli
     preprocessed_train_df.to_csv(preprocessed_train_path, index=False)
 
     logging.info("Saving the preprocessing pipeline")
-    # TODO 3 : sauvegarder la pipeline de preprocessing dans preprocessing_pipeline_destination
+    # TODO 3 : sauvegarder la pipeline de preprocessing dans preprocessing_pipeline_path
     """
     On utilise la librairie joblib pour réaliser la sauvegarde de pipelines et de modèles
     Il vous faudra trouver la fonction joblib qui permet de faire cette sauvegarde  

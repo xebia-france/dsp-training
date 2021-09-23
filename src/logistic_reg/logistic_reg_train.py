@@ -16,8 +16,8 @@ def logistic_reg_train(preprocessed_train_path, logistic_reg_model_path):
     :return: None
     """
 
-    # TODO 4 : lire les preprocessed_train_data qui ont été précédemment sauvegardés dans l'étape de preprocessing
-    #  et passer les bons paramètres à la fonction dans le script main.py.
+    # TODO 4 : lire le fichier des données d’entraînement préprocessées qui ont été précédemment sauvegardées dans
+    #  l'étape de preprocessing et passer le bon paramètre preprocessed_train_path à la fonction dans le script main.py.
     """
     L'import de pandas a déjà été réalisé en haut de ce fichier: import pandas as pd
     """
@@ -31,10 +31,8 @@ def logistic_reg_train(preprocessed_train_path, logistic_reg_model_path):
     )
 
     logging.info("Saving model")
-    # TODO 5 : sauvegarder le modèle logistic_reg dans le dossier LOGISTIC_REG_MODELS_PATH
-    #  avec comme nom la constante LOGISTIC_REG_MODEL_NAME du module src.constants.models. Il faudra comme pour la
-    # TODO 4 passer les bons paramètres dans le script main.py
+    # TODO 5 : sauvegarder le modèle logistic_reg dans logistic_reg_model_path. Il faudra comme pour la
+    #  4ème étape passer le bon paramètre logistic_reg_model_path à la fonction dans le script main.py
     """
     On utilise la même fonction joblib que ce qui a été fait dans le preprocessing  
     """
-

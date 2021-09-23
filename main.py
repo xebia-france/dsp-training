@@ -25,14 +25,16 @@ def main(bool_dict):
 
     if bool_dict["preprocess"]:
         # TODO 1 : appeler la méthode preprocess() du module preprocess avec les arguments attendus :
-        #  training_file_path, preprocessed_train_path et preprocessing_pipeline_path
+        #  training_file_path, preprocessed_train_path et preprocessing_pipeline_path.
         """
         Pour savoir quelles valeurs doivent prendre ces arguments, regarder ce que fait la méthode 
-        load_and_split_data() et où elle sauvegarde les différentes données
+        load_and_split_data(), où elle sauvegarde les différentes données, et les constantes définies dans
+        scr/constants/files.py.
         """
         pass
 
     if bool_dict["logistic_reg_train"]:
+        # Arguments à compléter dans la 4ème étape
         logistic_reg_train(preprocessed_train_path="???",
                            logistic_reg_model_path="???")
 
