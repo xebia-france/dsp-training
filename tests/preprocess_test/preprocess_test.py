@@ -29,9 +29,10 @@ class PreprocessTest(TestCase):
         mlflow.set_experiment(files.MLFLOW_EXPERIMENT_NAME)
         with mlflow.start_run():
             # Given
-            # TODO 1 : initialiser la variable preprocessed_train_path avec le chemin vers le fichier result_test.cs
+            # TODO 1 : initialiser la variable preprocessed_train_path avec le chemin vers le fichier result_test.csv
             #  du dossier preprocess_test, et la variable training_file_path avec le chemin vers le fichier
-            #  loans_test.csv du même dossier.
+            #  loans_test.csv du même dossier. N’utilisez pas de chemin relatif et pensez à utiliser os.path.join pour
+            #  une gestion cross-os des fichiers.
             preprocessed_train_path = NotImplementedError()
             training_file_path = NotImplementedError()
 
