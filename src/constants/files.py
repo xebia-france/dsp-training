@@ -1,5 +1,5 @@
 import os
-import src.constants.models as m
+import constants.models as m
 
 
 def create_folder(path):

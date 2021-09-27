@@ -62,17 +62,18 @@ Si vous avez un ordinateur Windows, connectez-vous en ssh à une machine Linux s
 
 Installation
 
-    pip3 install apache-airflow==1.10.12 --constraint airflow_constraints.txt
+    AIRFLOW_VERSION=2.0.2
+    PYTHON_VERSION="$(python3 --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+    CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+    pip3 install "apache-airflow[async,postgres]==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
 
     cd dsp-training # If you are not already at root dir
 
     export AIRFLOW_HOME=$(pwd)/airflow
-    export AIRFLOW__CORE__LOAD_EXAMPLES=False
-    export AIRFLOW__WEBSERVER__RBAC=True
 
 Créer la base de données
 
-    airflow initdb
+    airflow db init
 
     airflow create_user \
     --username admin \
@@ -84,19 +85,12 @@ Créer la base de données
 Lancer Airflow
 
     export AIRFLOW_HOME=$(pwd)/airflow
-    airflow webserver --port 8080
-    
-    # en cas d’erreur "no module named airflow.www"
-    # https://stackoverflow.com/questions/53583633/how-to-resolve-error-no-module-named-airflow-www-while-starting-airflow-web
-    pip3 uninstall -y gunicorn
-    pip3 install gunicorn==19.4.0
+    airflow webserver --port 5000
 
 Lancer le scheduler
 
     # Dans un 2ème terminal
-    export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES # https://stackoverflow.com/questions/66676165/airflow-task-for-uploading-file-to-s3-bucket-using-boto3-cause-python-to-crash-a
     export AIRFLOW_HOME=$(pwd)/airflow
     airflow scheduler
 
 Documentation Airflow sur AWS: https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html
-
