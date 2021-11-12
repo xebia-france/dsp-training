@@ -18,7 +18,10 @@ class IntegrationTest(TestCase):
         
     def tearDown(self) -> None:
         # Is executed at the end of each test run
-        shutil.rmtree(os.path.join(MLRUNS_PATH, "0"))
+        for i in range(10):
+            mlruns_path_i = os.path.join(MLRUNS_PATH, str(i))
+            if os.path.exists(mlruns_path_i):
+                shutil.rmtree(mlruns_path_i)
 
     @staticmethod
     def test_main_runs():
