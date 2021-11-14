@@ -21,20 +21,28 @@ def mean_absolute_percentage_error(y_true, y_pred):
     return np.mean(np.abs((y_true - y_pred) / y_true))
 
 
+def normalize_s3_filename(filename):
+    # for Unix machines
+    output_filename = filename.replace("/", "-")
+    # for Windows machines
+    output_filename = output_filename.replace("\\", "-")
+    return output_filename
+
+
 def upload_pandas_df_to_s3(df, s3_bucket, filename):
     s3_resource = boto3.resource('s3')
 
-    df.to_csv(filename.replace("/", "-"), index=False)
-    s3_resource.Object(s3_bucket, filename).upload_file(Filename=filename.replace("/", "-"))
-    os.remove(filename.replace("/", "-"))
+    df.to_csv(normalize_s3_filename(filename), index=False)
+    s3_resource.Object(s3_bucket, filename).upload_file(Filename=normalize_s3_filename(filename))
+    os.remove(normalize_s3_filename(filename))
 
 
 def load_pandas_df_from_s3(s3_bucket, filename):
     s3_resource = boto3.resource('s3')
 
-    s3_resource.Object(s3_bucket, filename).download_file(Filename=filename.replace("/", "-"))
-    df = pd.read_csv(filename.replace("/", "-"))
-    os.remove(filename.replace("/", "-"))
+    s3_resource.Object(s3_bucket, filename).download_file(Filename=normalize_s3_filename(filename))
+    df = pd.read_csv(normalize_s3_filename(filename))
+    os.remove(normalize_s3_filename(filename))
 
     return df
 
@@ -42,17 +50,17 @@ def load_pandas_df_from_s3(s3_bucket, filename):
 def upload_ml_object_to_s3(pipeline_or_model, s3_bucket, filename):
     s3_resource = boto3.resource('s3')
 
-    dump(pipeline_or_model, filename.replace("/", "-"))
-    s3_resource.Object(s3_bucket, filename).upload_file(Filename=filename.replace("/", "-"))
-    os.remove(filename.replace("/", "-"))
+    dump(pipeline_or_model, normalize_s3_filename(filename))
+    s3_resource.Object(s3_bucket, filename).upload_file(Filename=normalize_s3_filename(filename))
+    os.remove(normalize_s3_filename(filename))
 
 
 def load_ml_object_from_s3(s3_bucket, filename):
     s3_resource = boto3.resource('s3')
 
-    s3_resource.Object(s3_bucket, filename).download_file(Filename=filename.replace("/", "-"))
-    ml_object = load(filename.replace("/", "-"))
-    os.remove(filename.replace("/", "-"))
+    s3_resource.Object(s3_bucket, filename).download_file(Filename=normalize_s3_filename(filename))
+    ml_object = load(normalize_s3_filename(filename))
+    os.remove(normalize_s3_filename(filename))
 
     return ml_object
 
