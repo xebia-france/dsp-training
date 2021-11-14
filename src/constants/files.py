@@ -29,7 +29,7 @@ LOGISTIC_REG_MODELS_PATH = os.path.join(MODELS, "logistic_reg")
 CURRENT_RUN_ID = os.path.join(DATA_PATH, "current_run_id")
 
 LOANS = os.path.join(RAW_DATA, "loans.csv")
-NEW_LOANS_TO_ACCEPT = os.path.join(RAW_DATA, "new_loans.csv")
+NEW_LOANS = os.path.join(RAW_DATA, "new_loans.csv")
 
 TRAIN = os.path.join(INTERIM_DATA, "train.csv")
 TEST = os.path.join(INTERIM_DATA, "test.csv")

@@ -43,7 +43,7 @@ with DAG(
     predict = PythonOperator(
         task_id='predict',
         python_callable=predict,
-        op_kwargs={'test_file_path': files.NEW_LOANS_TO_ACCEPT,
+        op_kwargs={'test_file_path': files.NEW_LOANS,
                    'preprocessing_pipeline_path': files.PREPROCESSING_PIPELINE,
                    'logistic_reg_model_path': files.LOGISTIC_REG_MODELS_PATH,
                    'prediction_file_path': files.NEW_PREDICTIONS}
