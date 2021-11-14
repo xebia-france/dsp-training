@@ -44,4 +44,5 @@ PREDICTIONS_HISTORY = os.path.join(OUTPUT_DATA, f"{m.LOGISTIC_REG_MODEL_NAME}_pr
 METRICS_HISTORY = os.path.join(OUTPUT_DATA, f"{m.LOGISTIC_REG_MODEL_NAME}_metrics_history.csv")
 INPUT_STATS_HISTORY = os.path.join(OUTPUT_DATA, f"{m.LOGISTIC_REG_MODEL_NAME}_input_stats_history.csv")
 
-S3_BUCKET = "ps-dsp-training"
+# TODO 0: setup your own bucket
+S3_BUCKET = NotImplementedError()
