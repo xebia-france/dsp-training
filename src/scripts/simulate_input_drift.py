@@ -31,7 +31,7 @@ def plot_input_stats(input_stats_history):
 
     plt.xlabel("date")
     plt.ylabel("mean income")
-
+    plt.xticks(rotation=90)
     plt.title("Input drift detection on mean income", fontsize=30)
     plt.legend()
     plt.savefig(os.path.join(files.LOCAL_ROOT_PATH, "data", "output", "input_drift_plot.png"))
