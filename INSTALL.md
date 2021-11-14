@@ -58,7 +58,14 @@ Lancer le projet en local sans Airflow
 ## Airflow
 
 Les commandes suivantes peuvent être lancées en local sur les Mac et distributions Linux.
-Si vous avez un ordinateur Windows, connectez-vous en ssh à une machine Linux sur le cloud (par exemple, une instance EC2) et suivez les instructions du script [ec2_for_airflow_setup.sh](ec2_for_airflow_setup.sh)
+Si vous avez un ordinateur Windows, connectez-vous en ssh à une machine Linux sur le cloud (par exemple, une instance EC2) et suivez les instructions du script [ec2_for_airflow_setup.sh](ec2_for_airflow_setup.sh) en lançant les commandes suivantes:
+
+    git clone https://github.com/xebia-france/dsp-training.git
+    cd dsp-training
+    git checkout exercice6-solution
+    bash ec2_for_airflow_setup.sh
+
+Vous pouvez alors reprendre les instructions à partir de la section "Créer la base de données"
 
 Installation
 
@@ -68,7 +75,8 @@ Installation
     pip3 install "apache-airflow[async,postgres]==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
 
     cd dsp-training # If you are not already at root dir
-
+    
+    export PATH=~/.local/bin/:$PATH
     export AIRFLOW_HOME=$(pwd)/airflow
 
 Créer la base de données
@@ -84,13 +92,14 @@ Créer la base de données
 
 Lancer Airflow
 
-    export AIRFLOW_HOME=$(pwd)/airflow
     airflow webserver --port 5000
 
 Lancer le scheduler
 
     # Dans un 2ème terminal
+    cd dsp-training
     export AIRFLOW_HOME=$(pwd)/airflow
+    export PATH=~/.local/bin/:$PATH
     airflow scheduler
 
 Documentation Airflow sur AWS: https://airflow.apache.org/docs/apache-airflow-providers-amazon/stable/connections/aws.html
