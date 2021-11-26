@@ -83,7 +83,13 @@ Créer la base de données
 
     airflow db init
 
-    airflow create_user \
+Supprimer les dags d'exemple en modifiant cette ligne dans le fichier airflow.cfg 
+
+    load_examples = False
+
+Créer un utilisateur
+
+    airflow users create \
     --username admin \
     --firstname Peter \
     --lastname Parker \
@@ -96,7 +102,7 @@ Lancer Airflow
 
 Lancer le scheduler
 
-    # Dans un 2ème terminal
+    # Dans un 2ème terminal :
     cd dsp-training
     export AIRFLOW_HOME=$(pwd)/airflow
     export PATH=~/.local/bin/:$PATH
